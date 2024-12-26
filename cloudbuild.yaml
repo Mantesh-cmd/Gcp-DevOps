@@ -1,6 +1,6 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/gcp-devops-444500/Gcp-DevOps/gcp-pipeline-1', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-images/pipeline-1', '.']
 options:
   logging: CLOUD_LOGGING_ONLY  # Choose logging option
 # Uncomment the line below to specify logs bucket
