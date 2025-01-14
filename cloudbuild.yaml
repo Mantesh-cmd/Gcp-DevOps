@@ -1,0 +1,13 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-images/pipeline-1', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-images/pipeline-1']
+options:
+  logging: CLOUD_LOGGING_ONLY  # Choose logging option
+# Uncomment the line below to specify logs bucket
+# logs_bucket: your-logs-bucket
+# Uncomment this line if using regional user-owned bucket
+# default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
+serviceAccount: gcp-devops-444500@appspot.gserviceaccount.com
+
