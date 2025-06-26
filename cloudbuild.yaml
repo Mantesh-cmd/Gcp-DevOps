@@ -1,9 +1,9 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/gcp-devops-444500/pipeline-2', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/app-engine-python:v1.0', '.']
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/gcp-devops-444500/pipeline-2']
+    args: ['push', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/app-engine-python:v1.0']
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
@@ -11,7 +11,7 @@ steps:
         'app',
         'deploy',
         'app.yaml',
-        '--image-url=us-central1-docker.pkg.dev/gcp-devops-444500/pipeline-2',
+        '--image-url=us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/app-engine-python:v1.0',
         '--quiet'
       ]
 
