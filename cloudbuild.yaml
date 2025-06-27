@@ -1,19 +1,20 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/app-engine-python:v1.0', '.']
-
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0', '.']
+    
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/app-engine-python:v1.0']
-
+    args: ['push', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0']
+    
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
-      [
-        'app',
-        'deploy',
-        'app.yaml',
-        '--image-url=us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/app-engine-python:v1.0',
-        '--quiet'
-      ]
+      - 'run'
+      - 'deploy'
+      - 'my-service'
+      - '--image=us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0'
+      - '--region=us-central1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
