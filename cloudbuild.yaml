@@ -5,9 +5,21 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0']
     
+  # - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  #   entrypoint: 'bash'
+  #   args: ['-c', 'gcloud config set app/cloud_build_timeout 1600 && gcloud app deploy']
+
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'bash'
-    args: ['-c', 'gcloud config set app/cloud_build_timeout 1600 && gcloud app deploy']
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - test_function
+      - --region=us-central1
+      - --source=.
+      - --trigger-http
+      - --runtime=python312
+
 timeout: '1600s'
 
 
