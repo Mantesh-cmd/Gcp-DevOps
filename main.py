@@ -9,5 +9,5 @@
 # if __name__ == '__main__':
 #      app.run(host='0.0.0.0',port=8080)
 
-def hello_world(request):
+def test_function(request):
     return "Hello from Cloud Function!"
