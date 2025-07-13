@@ -1,31 +1,35 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0', '.']
-    
+    args: [
+      'build',
+      '-t', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0',
+      '.'
+    ]
+
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0']
-    
-  # - name: "gcr.io/cloud-builders/gke-deploy"
-  #   args:
-  #   - run
-  #   - --filename=kubernetes-resource-file
-  #   - --image=gcr.io/project-id/image:tag
-  #   - --location=${_CLOUDSDK_COMPUTE_ZONE}
-  #   - --cluster=${_CLOUDSDK_CONTAINER_CLUSTER}
-  
+    args: [
+      'push',
+      'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0'
+    ]
+
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      - run
+      - --image=${_IMAGE}
+      - --location=${_REGION}
+      - --cluster=${_CLUSTER_NAME}
+      - --project=${_PROJECT_ID}
+      # Optional: you can also add --app=your-app-name if needed
+
 timeout: '1600s'
 
-# substitutions:
-#   _CLOUDSDK_COMPUTE_ZONE: us-central1-a
-#   _CLOUDSDK_CONTAINER_CLUSTER: gcp-devops-444500
-#   _PROJECT_ID: gcp-devops-444500
-#   _REGION: us-central1
-
-
+substitutions:
+  _PROJECT_ID: gcp-devops-444500
+  _REGION: us-central1
+  _IMAGE: us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0
+  _CLUSTER_NAME: gcp-devop-01
 
 options:
   logging: CLOUD_LOGGING_ONLY
 
 serviceAccount: gcp-devops-444500@appspot.gserviceaccount.com
-
-
