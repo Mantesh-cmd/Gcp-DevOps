@@ -2,14 +2,14 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'build',
-      '-t', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0',
+      '-t', 'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v2.0',
       '.'
     ]
 
   - name: 'gcr.io/cloud-builders/docker'
     args: [
       'push',
-      'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0'
+      'us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v2.0'
     ]
 
   - name: "gcr.io/cloud-builders/gke-deploy"
@@ -26,7 +26,7 @@ timeout: '1600s'
 substitutions:
   _PROJECT_ID: gcp-devops-444500
   _REGION: us-central1-a
-  _IMAGE: us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v1.0
+  _IMAGE: us-central1-docker.pkg.dev/gcp-devops-444500/gcp-devops-01/my-image:v2.0
   _CLUSTER_NAME: gcp-devop-01
 
 options:
